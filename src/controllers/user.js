@@ -20,7 +20,7 @@ module.exports = {
     },
 
     async loginUser(req, res) {
-        const { usuario, email, senha } = await req.body;
+        const { usuario, email, senha } = req.body;
         let user = await User.findOne({ $or: [{ usuario: usuario }, { email: email }] });
         if (user) {
             const coincide = await bcrypt.compare(senha, user.senha);
@@ -36,7 +36,6 @@ module.exports = {
                         process.env.SECRET,
                     );
 
-                    console.log("Autenticação realizada com sucesso");
                 } catch (error) {
                     console.log(`Ocorreu um erro ${error}`);
                 }
@@ -44,7 +43,8 @@ module.exports = {
             } else {
                 res.status(404).json({ msg: "Usuário não encontrado" });
             }
-
+        } else {
+            res.status(404).json({ msg: "Usuário não encontrado" });
         }
     }
 }

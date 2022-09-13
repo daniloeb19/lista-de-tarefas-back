@@ -5,16 +5,15 @@ const router = require('./routes');
 const bodyParser = require('body-parser')
 
 require('dotenv').config();
-
 const cors = require('cors');
-
 const app = express();
+app.use(cors())
+require('./db')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(router);
 
-require('./db')
 
 app.listen(process.env.PORT || process.env.SERVER_PORT, () => {
     try {
