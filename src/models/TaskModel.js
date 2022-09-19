@@ -2,11 +2,10 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const DataSchema = new mongoose.Schema({
-usuario: String,
-data: String,
-tarefa: String,
-situacao: { type: String, default: "NC" },
-
+    usuario: String,
+    data: String,
+    tarefa: String,
+    situacao: { type: String, default: "NC" },
 }, {
     timestamps: true
 });
